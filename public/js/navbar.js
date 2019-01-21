@@ -14,6 +14,7 @@ function renderNavbar(user) {
   if (user._id !== undefined) {
     //navbarDiv.appendChild(newNavbarItem('Profile', '/u/profile?'+user._id));
     navbarDiv.appendChild(newNavbarItem('Logout ', '/logout'));
+    navbarDiv.appendChild(newNavbarItem('Rules ', '/rules'));
     navbarDiv.appendChild(newNavbarItem('Home', '/'));
   } else {
     //navbarDiv.appendChild(newNavbarItem('Login', '/auth/google'));
