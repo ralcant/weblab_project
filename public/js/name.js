@@ -25,7 +25,7 @@ function renderName(user){
         const start_button = document.createElement('a')
         start_button.className = "button allign_center_start"
         start_button.innerText = "START";
-        start_button.href = "#";
+        start_button.href = "game";
         document.body.appendChild(start_button);
 
         const rules_button = document.createElement('a')
