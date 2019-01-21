@@ -16,6 +16,7 @@ function renderNavbar(user) {
     navbarDiv.appendChild(newNavbarItem('Logout ', '/logout'));
     navbarDiv.appendChild(newNavbarItem('Rules ', '/rules'));
     navbarDiv.appendChild(newNavbarItem('Home', '/'));
+    navbarDiv.appendChild(newNavbarItem('About','/about'))
   } else {
     //navbarDiv.appendChild(newNavbarItem('Login', '/auth/google'));
   }

@@ -23,16 +23,22 @@ function renderName(user){
         welcome_message.appendChild(welc_Header);
 
         const start_button = document.createElement('a')
-        start_button.className = "button allign_center_rules"
+        start_button.className = "button allign_center_start"
         start_button.innerText = "START";
         start_button.href = "#";
         document.body.appendChild(start_button);
 
         const rules_button = document.createElement('a')
-        rules_button.className = "button allign_center_start";
+        rules_button.className = "button allign_center_rules";
         rules_button.innerText = "RULES";
         rules_button.href = "rules";
         document.body.appendChild(rules_button);
+
+        const about_button = document.createElement('a')
+        about_button.className ="button allign_center_about"
+        about_button.innerText = "About";
+        about_button.href = "about";
+        document.body.appendChild(about_button);
      }
      else{
         welc_Header.innerText = "Flappy TIM";

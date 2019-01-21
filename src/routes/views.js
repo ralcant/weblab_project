@@ -10,6 +10,9 @@ router.get('/', function(req, res, next) {
 router.get('/rules', function(req, res, next) {
   res.sendFile('rules.html', { root: 'src/views' });
 });
+router.get('/about', function(req, res, next){
+  res.sendFile('about.html', {root: 'src/views'})
+});
 
 router.get('/logout', function(req, res) {
   req.logout();
