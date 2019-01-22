@@ -72,7 +72,7 @@ app.use(function(err, req, res, next) {
 });
 
 // port con fig
-//const port = 3000; // config variable
+//const port = 3000; // config variab le
 const port = (process.env.PORT || 3000)
 const server = http.Server(app);
 server.listen(port, function() {
