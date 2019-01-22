@@ -11,20 +11,19 @@
 </head>
 
 <body onload="startGame()">
-    <nav class="navbar">
-        <!--<div class="navbar-brand" href="#"></div> -->
-        <div class="allign-upperleft" id="nav-item-container">
-          <!-- navbar items are inserted here -->
-        </div>
-      </nav>
-      <style>
-          canvas {
-            border: 1px solid #d3d3d3;
-            background-color: #f1f1f1;
-          }
-        </style>
-    <img id="tim" 
-    src="tim" alt="Tim the Beaver sprite">
+  <nav class="navbar">
+    <!--<div class="navbar-brand" href="#"></div> -->
+    <div class="allign-upperleft" id="nav-item-container">
+      <!-- navbar items are inserted here -->
+    </div>
+  </nav>
+  <style>
+    canvas {
+      border: 1px solid #d3d3d3;
+      background-color: #f1f1f1;
+    }
+  </style>
+  <img id="tim" src="tim" alt="Tim the Beaver sprite">
 
   <script>
 
@@ -70,7 +69,7 @@
         // print a game over message
         myGameArea.context.fillStyle = '#ffffff';
         myGameArea.context.font = "30px Arial";
-        myGameArea.context.fillRect(width / 2-50,height / 2-20, 250,100);
+        myGameArea.context.fillRect(width / 2 - 50, height / 2 - 20, 250, 100);
         myGameArea.context.fillStyle = '#000000';
         myGameArea.context.fillText("game over.....", width / 2, height / 2);
 
@@ -78,18 +77,42 @@
         myGameArea.context.fillText("your score: " + myGameArea.state.score, width / 2, height / 2 + 50);
 
         // TODO: check if high score
-
-        // send the high score
         var userID = "idk";
-        get('/api/whoami', {}, function(user) {
-          console.log(user._id);
-          const data = {
-          contentID : user._id,
-    content: myGameArea.state.score
-  };
+        get('/api/whoami', {}, function (user) {
+          console.log("fethcing score" + user._id);
+          if (user._id) {
+            const data = {
+              contentID: user._id,
+            };
+            get('/api/score', data, function(score)
+            {
+              console.log("the score: " + score.score);
+            });
+          }
 
-  post('/api/score', data);
-    });
+        });
+
+
+        // send the score
+        var userID = "idk";
+        get('/api/whoami', {}, function (user) {
+          console.log(user._id);
+          if (!user._id) {
+            const data = {
+              contentID: "guest",
+              content: myGameArea.state.score
+            };
+            post('/api/score', data);
+          }
+          else {
+            const data = {
+              contentID: user._id,
+              content: myGameArea.state.score
+            };
+            post('/api/score', data);
+          }
+
+        });
 
 
         // restart box
@@ -106,13 +129,14 @@
 
       // take key input
       if (myGameArea.keys && myGameArea.keys[myGameArea.keyToPress]) {
-        console.log("key pressed"); 
+        console.log("key pressed");
         myGameArea.state.yVelo = myGameArea.state.yVelo - 2;
         var oldKey = myGameArea.keyToPress;
         // pick a new, distinct key
         while (oldKey == myGameArea.keyToPress) {
           console.log("regen key");
-        myGameArea.keyToPress = myGameArea.keySet[Math.floor(Math.random() * myGameArea.keySet.length)]; }
+          myGameArea.keyToPress = myGameArea.keySet[Math.floor(Math.random() * myGameArea.keySet.length)];
+        }
         myGameArea.state.score += 1;
       }
 
@@ -153,7 +177,7 @@
       myGameArea.context.fillRect(125, 50, 125, 125);
       myGameArea.context.fillStyle = '#000000';
       myGameArea.context.fillText("Key: " + String.fromCharCode(myGameArea.keyToPress), 125, 75);
-      
+
       // display score to press
       myGameArea.context.fillStyle = '#000000';
       myGameArea.context.fillText("Score: " + myGameArea.state.score, 125, 115);
@@ -217,10 +241,10 @@
 
 
   </script>
-    <script src="/static/js/api.js"></script>
-    <script src="/static/js/navbar.js"></script>
-    <script src="/static/js/index.js"></script>
-    <script src="/static/js/name.js"></script>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/navbar.js"></script>
+  <script src="/static/js/index.js"></script>
+  <script src="/static/js/name.js"></script>
 
 </body>
 

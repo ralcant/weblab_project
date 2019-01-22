@@ -46,11 +46,17 @@ router.post(
   }
 );
 
-/*router.get('/stories', function(req, res) {
-  Story.find({}, function(err, stories) {
-    res.send(stories);
+router.get('/score', function(req, res) {
+  console.log("trying to fetch score");
+  Score.findOne({ googleid: req.body.contentID}, function (err, score) 
+  {
+    console.log("fetched score: "+score.score );
+    res.send({score});
   });
+
 });
+
+/*
 
 router.post(
   '/story',
