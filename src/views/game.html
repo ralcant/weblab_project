@@ -7,15 +7,22 @@
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    canvas {
-      border: 1px solid #d3d3d3;
-      background-color: #f1f1f1;
-    }
-  </style>
+
 </head>
 
 <body onload="startGame()">
+    <nav class="navbar">
+        <!--<div class="navbar-brand" href="#"></div> -->
+        <div class="allign-upperleft" id="nav-item-container">
+          <!-- navbar items are inserted here -->
+        </div>
+      </nav>
+      <style>
+          canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+          }
+        </style>
     <img id="tim" 
     src="tim" alt="Tim the Beaver sprite">
 
@@ -28,8 +35,8 @@
     var myGameArea = {
       canvas: document.createElement("canvas"),
       start: function () {
-        this.canvas.width = 600; // might make dynamic
-        this.canvas.height = 300;
+        this.canvas.width = 900; // might make dynamic
+        this.canvas.height = 450;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(update, 10);
@@ -41,7 +48,7 @@
           xPos: 100,
           yPos: 200,
           yVelo: 0,
-          score: 10
+          score: 0
         };
       },
 
@@ -54,8 +61,8 @@
     function update() {
       // update a frame...
 
-      // console.log(Date.now());
-
+      var width = myGameArea.canvas.width;
+      var height = myGameArea.canvas.height;
 
       // halt frame updates if game over
       if (this.isGameOver() == true) {
@@ -63,14 +70,12 @@
         // print a game over message
         myGameArea.context.fillStyle = '#ffffff';
         myGameArea.context.font = "30px Arial";
-        myGameArea.context.fillRect(myGameArea.canvas.width / 2-50, myGameArea.canvas.height / 2-20, 250,100);
-        
-
+        myGameArea.context.fillRect(width / 2-50,height / 2-20, 250,100);
         myGameArea.context.fillStyle = '#000000';
-        myGameArea.context.fillText("game over.....", myGameArea.canvas.width / 2, myGameArea.canvas.height / 2);
+        myGameArea.context.fillText("game over.....", width / 2, height / 2);
 
         // print your score
-        myGameArea.context.fillText("your score: " + myGameArea.state.score, myGameArea.canvas.width / 2, myGameArea.canvas.height / 2 + 50);
+        myGameArea.context.fillText("your score: " + myGameArea.state.score, width / 2, height / 2 + 50);
 
         // TODO: check if high score
 
@@ -89,12 +94,13 @@
       // take key input
       if (myGameArea.keys && myGameArea.keys[myGameArea.keyToPress]) {
         console.log("key pressed"); 
-        myGameArea.state.yVelo = myGameArea.state.yVelo - 0.5;
+        myGameArea.state.yVelo = myGameArea.state.yVelo - 2;
         var oldKey = myGameArea.keyToPress;
         // pick a new, distinct key
         while (oldKey == myGameArea.keyToPress) {
           console.log("regen key");
         myGameArea.keyToPress = myGameArea.keySet[Math.floor(Math.random() * myGameArea.keySet.length)]; }
+        myGameArea.state.score += 1;
       }
 
       // update coordinates of tim
@@ -116,7 +122,7 @@
 
       // clear frame
       context.fillStyle = '#365879';
-      context.fillRect(0, 0, myGameArea.canvas.width, myGameArea.canvas.height);
+      context.fillRect(0, 0, width, height);
 
       // display tim
       context.fillStyle = '#ffffff';
@@ -131,9 +137,13 @@
       // display key to press
       myGameArea.context.fillStyle = '#ffffff';
       myGameArea.context.font = "24px Arial";
-      myGameArea.context.fillRect(125, 50, 100, 50);
+      myGameArea.context.fillRect(125, 50, 125, 125);
       myGameArea.context.fillStyle = '#000000';
       myGameArea.context.fillText("Key: " + String.fromCharCode(myGameArea.keyToPress), 125, 75);
+      
+      // display score to press
+      myGameArea.context.fillStyle = '#000000';
+      myGameArea.context.fillText("Score: " + myGameArea.state.score, 125, 115);
 
       context.restore();
 
@@ -162,7 +172,7 @@
       console.log(mousePos.x);
       // if (isGameOver()==true) {
       if ((isInside(mousePos, restartRect)) && (isGameOver() == true)) {
-        console.log('restarct button clicked inside rect');
+        console.log('restart button clicked inside rect');
         myGameArea.start();
       }
 
@@ -194,7 +204,10 @@
 
 
   </script>
-
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/name.js"></script>
 
 </body>
 
