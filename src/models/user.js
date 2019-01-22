@@ -5,7 +5,10 @@ const mongoose = require('mongoose');
 const UserModelSchema = new mongoose.Schema ({
   name        	: String,
   googleid     	: String,
-  highScore : Number,
+  highScore : {
+    type: Number,
+    default: 0
+  }
 });
 
 // compile model from schema

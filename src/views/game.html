@@ -79,6 +79,14 @@
 
         // TODO: check if high score
 
+        // send the high score
+        const data = {
+    content: myGameArea.state.score
+  };
+
+  post('/api/score', data);
+  console.log("score logged");
+
         // restart box
         myGameArea.context.fillStyle = '#ffffff';
         myGameArea.context.font = "12px Arial";

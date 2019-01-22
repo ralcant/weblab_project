@@ -44,10 +44,10 @@ function renderName(user){
      }
      else{
         welcome_message_id.className = "animated flip";
-        welc_Header.innerText = "Flappy TIM";
+        welc_Header.innerText = "Flappy TIM!!!";
         welcome_message.appendChild(welc_Header);
 
-        messageHeader.innerText = "You better be ready to press any key"
+        messageHeader.innerText = "You better be ready to press any key!!!"
         messageContainer.appendChild(messageHeader);
 
         const login_button = document.createElement('a')

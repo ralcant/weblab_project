@@ -1,3 +1,6 @@
+// dotenv
+const dotenv = require('dotenv').config();
+
 // libraries
 const http = require('http');
 const bodyParser = require('body-parser');
@@ -27,7 +30,7 @@ app.use(cors());
 
 // set up sessions
 app.use(session({
-  secret: 'session-secret',
+  secret: process.env.SESSION_SECRET,
   resave: 'false',
   saveUninitialized: 'true'
 }));
@@ -48,7 +51,7 @@ app.get(
   '/auth/google/callback',
   passport.authenticate(
     'google',
-    { failureRedirect: '/login' }
+    { failureRedirect: '/about' }
   ),
   function(req, res) {
     res.redirect('/');
