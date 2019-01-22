@@ -8,8 +8,8 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 
-//line added for deployment
-require('dotenv').config();
+// //line added for deployment
+// require('dotenv').config();
 
 // local dependencies
 const db = require('./db');
