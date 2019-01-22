@@ -3,10 +3,12 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const User = require('./models/user');
 
+const dotenv = require('dotenv').config();
+
 // set up passport configs
 passport.use(new GoogleStrategy({
-  clientID: '121876641182-2ek68mhau1s556fii5ve1g23ebinbrga.apps.googleusercontent.com', // config variables
-  clientSecret: 'BZEcbkgZLq-JlTodXLIZcdBL',
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: '/auth/google/callback'
 }, function(accessToken, refreshToken, profile, done) {
   User.findOne({
