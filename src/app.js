@@ -51,7 +51,10 @@ app.get(
   '/auth/google/callback',
   passport.authenticate(
     'google',
-    { failureRedirect: '/about' }
+    {scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'],
+     failureRedirect: '/about' }
   ),
   function(req, res) {
     res.redirect('/');
