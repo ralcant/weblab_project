@@ -2,6 +2,7 @@ function renderName(user){
     const nameContainer = document.getElementById("name-container");
     const nameHeader = document.createElement('h1')
 
+    const welcome_message_id = document.getElementById("welcome_message_id")
     const welcome_message = document.getElementById("first_message");
     const welc_Header = document.createElement('h1');
 
@@ -16,6 +17,7 @@ function renderName(user){
     //const login_button = document.createElement('a');
     //welc_Header.className = "welcome-text";
     if (user._id !== undefined) {
+      //   welcome_message_id.className = "welcome_text";
         nameHeader.innerText = "Hello, " + user.name;
         nameContainer.appendChild(nameHeader);
         //nameContainer.appendChild(user.name); <- first try, incorrect
@@ -41,6 +43,7 @@ function renderName(user){
         document.body.appendChild(about_button);
      }
      else{
+        welcome_message_id.className = "animated flip";
         welc_Header.innerText = "Flappy TIM";
         welcome_message.appendChild(welc_Header);
 

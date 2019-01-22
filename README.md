@@ -9,6 +9,5 @@ Credits to:
  - Alex Chen (snake-react)
  - Catbook
  - reactoroids
- - catbook
  - tim logo# flappy-tim-js
  - https://www.w3schools.com/graphics/game_movement.asp
