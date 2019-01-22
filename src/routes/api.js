@@ -4,8 +4,8 @@ const connect = require('connect-ensure-login');
 
 // models
 const User = require('../models/user');
-//const Story = require('../models/story');
-//const Comment = require('../models/comment');
+const Score = require('../models/score');
+
 
 const router = express.Router();
 
@@ -24,6 +24,27 @@ router.get('/user', function(req, res) {
     res.send(user);
   });
 });
+
+router.post(
+  '/score',
+  // connect.ensureLoggedIn(),
+  function(req, res) {
+    console.log("in apis.js");
+    const newScore = new Score({
+      // 'googleid'     	: req.user._id,
+      'googleid'     	: "idk",
+      'score': req.body.content,
+    });
+
+    newScore.save(function(err,score) {
+      console.log("saved???");
+      // configure socketio
+      if (err) console.log("uh oh" + err);
+    });
+
+    res.send({});
+  }
+);
 
 /*router.get('/stories', function(req, res) {
   Story.find({}, function(err, stories) {
