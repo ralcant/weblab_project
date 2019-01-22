@@ -54,7 +54,7 @@ app.get(
     {scope: [
       'https://www.googleapis.com/auth/userinfo.profile',
       'https://www.googleapis.com/auth/userinfo.email'],
-     failureRedirect: '/about' }
+     failureRedirect: '/login' }
   ),
   function(req, res) {
     res.redirect('/');
@@ -76,12 +76,14 @@ app.use(function(err, req, res, next) {
     message: err.message + "test err msg",
   });
 });
-
 // port con fig
 //const port = 3000; // config variab le
-const port = (process.env.PORT || 3000)
+const port = process.env.PORT || 3000;
 const server = http.Server(app);
 server.listen(port, function() {
   console.log('Server running on port: ' + port);
 });
 // server.listen(process.env.PORT || 5000)
+// http.listen( port , () =>{
+//   console.log("Listening on port 3000" );
+// });
