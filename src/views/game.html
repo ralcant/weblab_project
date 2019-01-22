@@ -80,12 +80,17 @@
         // TODO: check if high score
 
         // send the high score
-        const data = {
+        var userID = "idk";
+        get('/api/whoami', {}, function(user) {
+          console.log(user._id);
+          const data = {
+          contentID : user._id,
     content: myGameArea.state.score
   };
 
   post('/api/score', data);
-  console.log("score logged");
+    });
+
 
         // restart box
         myGameArea.context.fillStyle = '#ffffff';

@@ -31,15 +31,15 @@ router.post(
   function(req, res) {
     console.log("in apis.js");
     const newScore = new Score({
-      // 'googleid'     	: req.user._id,
-      'googleid'     	: "idk",
+      'googleid'     	: req.body.contentID,
       'score': req.body.content,
     });
 
     newScore.save(function(err,score) {
       console.log("saved???");
       // configure socketio
-      if (err) console.log("uh oh" + err);
+      if (err) {console.log("uh oh" + err)}
+      else {console.log("saved sucess? id "+ newScore.googleid)};
     });
 
     res.send({});
