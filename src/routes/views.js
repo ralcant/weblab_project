@@ -18,6 +18,10 @@ router.get('/about', function(req, res, next){
   res.sendFile('about.html', {root: 'src/views'})
 });
 
+router.get('/tim', function(req, res, next){
+  res.sendFile('timSprite.png', {root: 'src/views'})
+});
+
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');

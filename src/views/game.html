@@ -16,6 +16,9 @@
 </head>
 
 <body onload="startGame()">
+    <img id="tim" 
+    src="tim" alt="Tim the Beaver sprite">
+
   <script>
 
     function startGame() {
@@ -30,6 +33,9 @@
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(update, 10);
+        this.keyToPress = 87;
+        this.keySet = [83, 87];
+        this.timHeight = document.getElementById("tim").height;
         this.state = {
           isGameOver: false,
           xPos: 100,
@@ -48,29 +54,27 @@
     function update() {
       // update a frame...
 
-      console.log(Date.now());
+      // console.log(Date.now());
 
 
       // halt frame updates if game over
       if (this.isGameOver() == true) {
         myGameArea.stop();
         // print a game over message
-
-
         myGameArea.context.fillStyle = '#ffffff';
         myGameArea.context.font = "30px Arial";
-        myGameArea.context.fillRect(0, 0, myGameArea.canvas.width / 2, myGameArea.canvas.height / 2);
+        myGameArea.context.fillRect(myGameArea.canvas.width / 2-50, myGameArea.canvas.height / 2-20, 250,100);
+        
+
+        myGameArea.context.fillStyle = '#000000';
         myGameArea.context.fillText("game over.....", myGameArea.canvas.width / 2, myGameArea.canvas.height / 2);
 
         // print your score
-
         myGameArea.context.fillText("your score: " + myGameArea.state.score, myGameArea.canvas.width / 2, myGameArea.canvas.height / 2 + 50);
 
         // TODO: check if high score
 
-        // restart button
-
-
+        // restart box
         myGameArea.context.fillStyle = '#ffffff';
         myGameArea.context.font = "12px Arial";
         myGameArea.context.fillRect(125, 175, 100, 50);
@@ -83,9 +87,14 @@
       }
 
       // take key input
-      if (myGameArea.keys && myGameArea.keys[87]) {
-        myGameArea.state.yVelo = myGameArea.state.yVelo - 0.1;
-        console.log("w pressed");
+      if (myGameArea.keys && myGameArea.keys[myGameArea.keyToPress]) {
+        console.log("key pressed"); 
+        myGameArea.state.yVelo = myGameArea.state.yVelo - 0.5;
+        var oldKey = myGameArea.keyToPress;
+        // pick a new, distinct key
+        while (oldKey == myGameArea.keyToPress) {
+          console.log("regen key");
+        myGameArea.keyToPress = myGameArea.keySet[Math.floor(Math.random() * myGameArea.keySet.length)]; }
       }
 
       // update coordinates of tim
@@ -103,27 +112,36 @@
 
       // define frame stuff
       context.save();
-      // context.scale(myGameArea.state.screen.ratio, myGameArea.state.screen.ratio);
 
 
       // clear frame
       context.fillStyle = '#365879';
-      // context.globalAlpha = 0.4;
       context.fillRect(0, 0, myGameArea.canvas.width, myGameArea.canvas.height);
-      // context.globalAlpha = 1;
 
+      // display tim
       context.fillStyle = '#ffffff';
       context.font = "30px Arial";
-      context.fillText("lmao xD", myGameArea.state.xPos, myGameArea.state.yPos);
+      var img = document.getElementById("tim");
+      context.drawImage(img, myGameArea.state.xPos, myGameArea.state.yPos);
+      // context.fillText("lmao xD", myGameArea.state.xPos, myGameArea.state.yPos);
 
+
+      // display score
+
+      // display key to press
+      myGameArea.context.fillStyle = '#ffffff';
+      myGameArea.context.font = "24px Arial";
+      myGameArea.context.fillRect(125, 50, 100, 50);
+      myGameArea.context.fillStyle = '#000000';
+      myGameArea.context.fillText("Key: " + String.fromCharCode(myGameArea.keyToPress), 125, 75);
 
       context.restore();
 
     }
 
     function isGameOver() {
-      console.log(myGameArea.state.yPos);
-      if (myGameArea.state.yPos > myGameArea.canvas.height) {
+      // console.log(myGameArea.state.yPos);
+      if (myGameArea.state.yPos + myGameArea.timHeight > myGameArea.canvas.height) {
         // fell too far down
         console.log("fell down");
         return true;
