@@ -9,7 +9,6 @@ Credits to:
  - Alex Chen (snake-react)
  - Catbook
  - reactoroids
- - catbook
  - tim logo# flappy-tim-js
  - https://www.w3schools.com/graphics/game_movement.asp
  https://stackoverflow.com/questions/24384368/simple-button-in-html5-canvas
