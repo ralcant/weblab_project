@@ -8,6 +8,8 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 
+// //line added for deployment
+// require('dotenv').config();
 
 // local dependencies
 const db = require('./db');
@@ -72,9 +74,11 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// port config
-const port = 3000; // config variable
+// port con fig
+//const port = 3000; // config variab le
+const port = (process.env.PORT || 3000)
 const server = http.Server(app);
 server.listen(port, function() {
   console.log('Server running on port: ' + port);
 });
+// server.listen(process.env.PORT || 5000)
